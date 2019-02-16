@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StudentRegisterationFromModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClassYear">
+          <Key>
+            <PropertyRef Name="class_YearsId" />
+          </Key>
+          <Property Name="class_YearsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Of_Year" Type="nvarchar" MaxLength="234" />
+        </EntityType>
+        <EntityType Name="SchoolYear">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Of_school_Year" Type="nvarchar" MaxLength="234" />
+        </EntityType>
+        <EntityType Name="StatusOfStudent">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Student_status" Type="nvarchar" MaxLength="234" />
+        </EntityType>
+        <EntityType Name="studentInfo">
+          <Key>
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="studentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearId" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="234" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="123" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="234" />
+          <Property Name="S_Adress" Type="nvarchar" MaxLength="234" />
+          <Property Name="Date_Of_Birth" Type="datetime" />
+          <Property Name="Place_Of_Birth" Type="varchar" MaxLength="234" />
+          <Property Name="Age" Type="nvarchar" MaxLength="234" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="234" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="class_YearsId" Type="int" />
+          <Property Name="Guardian" Type="nvarchar" MaxLength="234" />
+          <Property Name="Relation" Type="nvarchar" MaxLength="234" />
+          <Property Name="G_Address" Type="nvarchar" MaxLength="234" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="234" />
+        </EntityType>
+        <Association Name="FK__studentIn__class__1CF15040">
+          <End Role="ClassYear" Type="Self.ClassYear" Multiplicity="0..1" />
+          <End Role="studentInfo" Type="Self.studentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassYear">
+              <PropertyRef Name="class_YearsId" />
+            </Principal>
+            <Dependent Role="studentInfo">
+              <PropertyRef Name="class_YearsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__studentIn__Statu__1BFD2C07">
+          <End Role="StatusOfStudent" Type="Self.StatusOfStudent" Multiplicity="0..1" />
+          <End Role="studentInfo" Type="Self.studentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOfStudent">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="studentInfo">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__studentIn__YearI__1B0907CE">
+          <End Role="SchoolYear" Type="Self.SchoolYear" Multiplicity="0..1" />
+          <End Role="studentInfo" Type="Self.studentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolYear">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="studentInfo">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentRegisterationFromModelStoreContainer">
+          <EntitySet Name="ClassYear" EntityType="Self.ClassYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolYear" EntityType="Self.SchoolYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusOfStudent" EntityType="Self.StatusOfStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="studentInfo" EntityType="Self.studentInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__studentIn__class__1CF15040" Association="Self.FK__studentIn__class__1CF15040">
+            <End Role="ClassYear" EntitySet="ClassYear" />
+            <End Role="studentInfo" EntitySet="studentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__studentIn__Statu__1BFD2C07" Association="Self.FK__studentIn__Statu__1BFD2C07">
+            <End Role="StatusOfStudent" EntitySet="StatusOfStudent" />
+            <End Role="studentInfo" EntitySet="studentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__studentIn__YearI__1B0907CE" Association="Self.FK__studentIn__YearI__1B0907CE">
+            <End Role="SchoolYear" EntitySet="SchoolYear" />
+            <End Role="studentInfo" EntitySet="studentInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentRegisterationFromModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StudentRegisterationFromEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClassYears" EntityType="StudentRegisterationFromModel.ClassYear" />
+          <EntitySet Name="SchoolYears" EntityType="StudentRegisterationFromModel.SchoolYear" />
+          <EntitySet Name="StatusOfStudents" EntityType="StudentRegisterationFromModel.StatusOfStudent" />
+          <EntitySet Name="studentInfoes" EntityType="StudentRegisterationFromModel.studentInfo" />
+          <AssociationSet Name="FK__studentIn__class__1CF15040" Association="StudentRegisterationFromModel.FK__studentIn__class__1CF15040">
+            <End Role="ClassYear" EntitySet="ClassYears" />
+            <End Role="studentInfo" EntitySet="studentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__studentIn__YearI__1B0907CE" Association="StudentRegisterationFromModel.FK__studentIn__YearI__1B0907CE">
+            <End Role="SchoolYear" EntitySet="SchoolYears" />
+            <End Role="studentInfo" EntitySet="studentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__studentIn__Statu__1BFD2C07" Association="StudentRegisterationFromModel.FK__studentIn__Statu__1BFD2C07">
+            <End Role="StatusOfStudent" EntitySet="StatusOfStudents" />
+            <End Role="studentInfo" EntitySet="studentInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClassYear">
+          <Key>
+            <PropertyRef Name="class_YearsId" />
+          </Key>
+          <Property Name="class_YearsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Of_Year" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="studentInfoes" Relationship="StudentRegisterationFromModel.FK__studentIn__class__1CF15040" FromRole="ClassYear" ToRole="studentInfo" />
+        </EntityType>
+        <EntityType Name="SchoolYear">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Of_school_Year" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="studentInfoes" Relationship="StudentRegisterationFromModel.FK__studentIn__YearI__1B0907CE" FromRole="SchoolYear" ToRole="studentInfo" />
+        </EntityType>
+        <EntityType Name="StatusOfStudent">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Student_status" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="studentInfoes" Relationship="StudentRegisterationFromModel.FK__studentIn__Statu__1BFD2C07" FromRole="StatusOfStudent" ToRole="studentInfo" />
+        </EntityType>
+        <EntityType Name="studentInfo">
+          <Key>
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="studentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YearId" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="123" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="S_Adress" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Of_Birth" Type="DateTime" Precision="3" />
+          <Property Name="Place_Of_Birth" Type="String" MaxLength="234" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="class_YearsId" Type="Int32" />
+          <Property Name="Guardian" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="Relation" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="G_Address" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClassYear" Relationship="StudentRegisterationFromModel.FK__studentIn__class__1CF15040" FromRole="studentInfo" ToRole="ClassYear" />
+          <NavigationProperty Name="SchoolYear" Relationship="StudentRegisterationFromModel.FK__studentIn__YearI__1B0907CE" FromRole="studentInfo" ToRole="SchoolYear" />
+          <NavigationProperty Name="StatusOfStudent" Relationship="StudentRegisterationFromModel.FK__studentIn__Statu__1BFD2C07" FromRole="studentInfo" ToRole="StatusOfStudent" />
+        </EntityType>
+        <Association Name="FK__studentIn__class__1CF15040">
+          <End Type="StudentRegisterationFromModel.ClassYear" Role="ClassYear" Multiplicity="0..1" />
+          <End Type="StudentRegisterationFromModel.studentInfo" Role="studentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassYear">
+              <PropertyRef Name="class_YearsId" />
+            </Principal>
+            <Dependent Role="studentInfo">
+              <PropertyRef Name="class_YearsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__studentIn__YearI__1B0907CE">
+          <End Type="StudentRegisterationFromModel.SchoolYear" Role="SchoolYear" Multiplicity="0..1" />
+          <End Type="StudentRegisterationFromModel.studentInfo" Role="studentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolYear">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="studentInfo">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__studentIn__Statu__1BFD2C07">
+          <End Type="StudentRegisterationFromModel.StatusOfStudent" Role="StatusOfStudent" Multiplicity="0..1" />
+          <End Type="StudentRegisterationFromModel.studentInfo" Role="studentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOfStudent">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="studentInfo">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentRegisterationFromModelStoreContainer" CdmEntityContainer="StudentRegisterationFromEntities">
+          <EntitySetMapping Name="ClassYears">
+            <EntityTypeMapping TypeName="StudentRegisterationFromModel.ClassYear">
+              <MappingFragment StoreEntitySet="ClassYear">
+                <ScalarProperty Name="Name_Of_Year" ColumnName="Name_Of_Year" />
+                <ScalarProperty Name="class_YearsId" ColumnName="class_YearsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolYears">
+            <EntityTypeMapping TypeName="StudentRegisterationFromModel.SchoolYear">
+              <MappingFragment StoreEntitySet="SchoolYear">
+                <ScalarProperty Name="Name_Of_school_Year" ColumnName="Name_Of_school_Year" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusOfStudents">
+            <EntityTypeMapping TypeName="StudentRegisterationFromModel.StatusOfStudent">
+              <MappingFragment StoreEntitySet="StatusOfStudent">
+                <ScalarProperty Name="Student_status" ColumnName="Student_status" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="studentInfoes">
+            <EntityTypeMapping TypeName="StudentRegisterationFromModel.studentInfo">
+              <MappingFragment StoreEntitySet="studentInfo">
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="G_Address" ColumnName="G_Address" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="Guardian" ColumnName="Guardian" />
+                <ScalarProperty Name="class_YearsId" ColumnName="class_YearsId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Place_Of_Birth" ColumnName="Place_Of_Birth" />
+                <ScalarProperty Name="Date_Of_Birth" ColumnName="Date_Of_Birth" />
+                <ScalarProperty Name="S_Adress" ColumnName="S_Adress" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
